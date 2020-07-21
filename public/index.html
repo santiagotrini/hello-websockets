@@ -1,15 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WebSockets chat app</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <link rel="stylesheet" href="styles/style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>WebSockets chat app</title>
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-      <input id="msg" autocomplete="off" />
-      <button>Enviar</button>
-    </form>
+    <!-- Top level container -->
+    <div class="container d-flex flex-column p-5">
+      <!-- Messages container -->
+      <div class="d-flex flex-column align-items-start" id="messages"></div>
+      <!-- Message form -->
+      <form id="form" class="mt-auto" action="">
+        <div class="form-row d-flex">
+          <div class="col-2">
+            <input id="nick" class="mr-auto form-control" placeholder="Nombre" value="">
+          </div>
+          <div class="col-8">
+            <input id="msg" class="mx-auto form-control" autocomplete="off">
+          </div>
+          <div class="col-2">
+            <button class="ml-auto btn btn-primary">Enviar &nbsp<i class="fa fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- JavaScript -->
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="scripts/chat.js"></script>
   </body>
