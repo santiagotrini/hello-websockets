@@ -12,7 +12,7 @@ document.getElementById('form').addEventListener('submit', (e) => {
 socket.on('chat message', (msg) => {
   const div = document.createElement('div');
   div.innerHTML = msg;
-  div.classList.add('alert', 'alert-secondary')
+  div.classList.add('chat-message')
   document.getElementById('messages').append(div);
   div.scrollIntoView();
 })

@@ -1,13 +1,57 @@
-html, body, .container {
-  height: 100%
+html, body {
+  font-family: sans-serif;
+  height: 99%;
 }
 
-#messages {
+.container {
+  height: 97%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5em;
+  background-color: gainsboro;
+}
+
+.messages {
+  height: 93%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: auto;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-#messages::-webkit-scrollbar {
-  display: none
+.form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: auto;
+}
+
+input, button {
+  margin: 0.2em;
+  font-size: 1.5em;
+}
+
+button {
+  padding: 0.3em 1.2em;
+  color: white;
+  background-color: teal;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+}
+
+#msg {
+  flex-grow: 4;
+}
+
+.chat-message, .sent-message {
+  display: inline-block;
+  font-size: 1.5em;
+  margin: 0.4em;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
 }
