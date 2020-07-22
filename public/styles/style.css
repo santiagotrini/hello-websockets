@@ -1,25 +1,30 @@
 html, body {
   font-family: sans-serif;
-  height: 99%;
+  min-height: 100vh;
+  margin: 0;
 }
 
 .container {
-  height: 90%;
+  min-height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
-  /*margin: 0.2em;*/
-  background-color: gainsboro;
+  justify-content: flex-start;
 }
 
 .messages {
-  height: 90%;
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: auto;
+  flex-grow: 1;
+  margin-bottom: 10px;
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+.messages::-webkit-scrollbar {
+  display: none;
 }
 
 .form {
@@ -28,13 +33,17 @@ html, body {
   justify-content: flex-start;
   flex-wrap: wrap;
   margin-top: auto;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
-.nav {
+.header {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: auto;
   background-color: black;
   font-family: 'Knewave', cursive;
   color: white;
@@ -47,7 +56,6 @@ input, button {
   font-size: 16px;
 }
 
-
 .nick-input {
   background: transparent;
   border: none;
@@ -57,7 +65,7 @@ input, button {
 }
 
 button {
-  padding: 0.3em 1.2em;
+  padding: 5px 15px;
   color: white;
   background-color: teal;
   text-align: center;
@@ -67,7 +75,12 @@ button {
 
 
 #msg {
+  background: transparent;
+  border: none;
+  color: black;
+  border-bottom: 1px solid #888;
   flex-grow: 1;
+  margin-right: 15px;
 }
 
 .chat-message, .sent-message {
@@ -78,6 +91,10 @@ button {
   background-color: white;
   border-radius: 5px;
   line-height: 1.8em;
+}
+
+.chat-message {
+  background-color: gainsboro;
 }
 
 .sent-message {

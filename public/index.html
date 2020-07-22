@@ -14,21 +14,21 @@
     <!-- Google fonts -->
      <link href="https://fonts.googleapis.com/css2?family=Knewave&display=swap" rel="stylesheet">
 
-    <title>WebSockets chat app</title>
+    <title>la35chat</title>
   </head>
   <body>
-    <div class="nav">
-      <span>la35chat</span>
-      <input id="nick" size="10" class="nick-input" placeholder="Nombre" value="" autocomplete="off">
-    </div>
     <!-- Top level container -->
     <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <span>la35chat</span>
+        <input id="nick" size="10" class="nick-input" placeholder="Nombre" value="" autocomplete="off">
+      </div>
       <!-- Messages container -->
       <div class="messages" id="messages"></div>
       <!-- Message form -->
       <form id="form" class="form" action="">
-        <!--input id="nick" size="6" class="" placeholder="Nombre" value=""-->
-        <input id="msg" class="" autocomplete="off">
+        <input id="msg" class="" autocomplete="off" placeholder="Mensaje">
         <button class=""><i class="fa fa-paper-plane"></i></button>
       </form>
     </div>
