@@ -49,9 +49,19 @@ button {
 
 .chat-message, .sent-message {
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin: 0.4em;
-  padding: 10px;
+  padding: 10px 10px;
   background-color: white;
   border-radius: 5px;
+  line-height: 1.8em;
+}
+
+.sent-message {
+  background-color: lightsteelblue;
+  align-self: flex-end;
+}
+
+.nick {
+  font-weight: bold;
 }
