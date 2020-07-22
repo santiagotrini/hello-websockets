@@ -4,10 +4,10 @@ html, body {
 }
 
 .container {
-  height: 97%;
+  height: 98%;
   display: flex;
   flex-direction: column;
-  margin: 0.5em;
+  margin: 0.2em;
   background-color: gainsboro;
 }
 
@@ -26,12 +26,13 @@ html, body {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  flex-wrap: wrap;
   margin-top: auto;
 }
 
 input, button {
-  margin: 0.2em;
-  font-size: 1.5em;
+  margin: 0.1em;
+  font-size: 16px;
 }
 
 button {
@@ -43,13 +44,14 @@ button {
   border-radius: 5px;
 }
 
+
 #msg {
-  flex-grow: 4;
+  flex-grow: 1;
 }
 
 .chat-message, .sent-message {
   display: inline-block;
-  font-size: 1.2em;
+  font-size: 16px;
   margin: 0.4em;
   padding: 10px 10px;
   background-color: white;
