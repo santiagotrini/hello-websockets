@@ -14,7 +14,7 @@ Un _socket_ es un medio de comunicación entre procesos (programas). En el conte
 
 Claro que toda comunicación a través de la red sucede a través de _sockets_, el protocolo HTTP no es la excepción, pero los WebSockets que son un estándar más moderno son distintos. HTTP y WS son protocolos distintos.
 
-La ventaja de los WebSockets es que liberan al cliente de tener que iniciar una comunicación con el servidor para recibir datos. Antes de que los navegadores implementaran este protocolo (que existe desde el 2011), aplicaciones como el chat de Facebook usaban una técnica llamada _AJAX long polling_, que es una versión adaptada a aplicaciones de tiempo real de lo que hicimos en [hello-fetch](https://github.com/santiagotrini/hello-fetch). Con el protocolo WebSockets obtenemos un canal [_full-duplex_](https://es.wikipedia.org/wiki/D%C3%BAplex_(telecomunicaciones), es decir algo parecido al teléfono, que podemos hablar todos a la vez y la información viaja en los dos sentidos en tiempo real. En cambio HTTP sería más parecido a comunicarse por carta.
+La ventaja de los WebSockets es que liberan al cliente de tener que iniciar una comunicación con el servidor para recibir datos. Antes de que los navegadores implementaran este protocolo (que existe desde el 2011), aplicaciones como el chat de Facebook usaban una técnica llamada _AJAX long polling_, que es una versión adaptada a aplicaciones de tiempo real de lo que hicimos en [hello-fetch](https://github.com/santiagotrini/hello-fetch). Con el protocolo WebSockets obtenemos un canal [_full-duplex_](https://es.wikipedia.org/wiki/D%C3%BAplex_(telecomunicaciones)), es decir algo parecido al teléfono, que podemos hablar todos a la vez y la información viaja en los dos sentidos en tiempo real. En cambio HTTP sería más parecido a comunicarse por carta.
 
 ## Creando el proyecto
 
@@ -249,7 +249,13 @@ Como no voy a explicar lo que intenté hacer con lo de arriba les dejo un link a
 
 ### Agregamos JavaScript
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+En el `index.html` agregamos dos scripts de JS. El primero era la librería para el cliente de Socket.IO. En el segundo script `scripts/chat.js` tenemos que escribir código para enviar y recibir los mensajes.
+
+En la primera línea tenemos la variable que representa la conexión con el server. Lo hacemos con `io()` que sin argumentos se conecta al _host_ del sitio (que sería `http://localhost`) y es el mismo _host_ para el _frontend_ y _backend_. Si el server estuviera en otra dirección pondríamos la URL como argumento de `io()`.
+
+Lo primero que hacemos es agregar un _listener_ al formulario. Cuando enviamos el formulario, o sea el evento de _submit_, enviamos el mensaje y el _nick_ al server y agregamos el mensaje a la interfaz con un `div` y dos `span`.
+
+Aclaración, hay dos _sockets_ en cada conexión entre cliente y servidor. Del lado del cliente la variable `socket` emite eventos que representan mensajes de chat y del lado del server (en `index.js`) se retransmiten a todos los otros clientes que estén escuchando (en la parte de `socket.broadcast.emit()`).
 
 ```js
 const socket = io();
@@ -299,8 +305,12 @@ socket.on('chat message', (msg) => {
 });
 ```
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+La otra parte de este script es cuando registramos el _listener_ de eventos `chat message` con `socket.on()`. Cuando el server envía eventos de este tipo creamos un `div` y dos `span` y los agregamos al contenedor de mensajes con el texto correspondiente.
+
+El código que manipula el DOM y crea los mensajes es muy similar cuando enviamos y cuando recibimos, no estaría mal mejorar el código para no repetir lo mismo dos veces, pero se los dejo a ustedes de tarea.
 
 ## ¿Y ahora?
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Después de este breve desvío podemos terminar de ver el _stack_ MERN en [hello-react](https://github.com/santiagotrini/hello-react).
+
+Si quieren ver más protocolos que están de moda en los últimos años pueden pasar por [hello-iot](https://github.com/santiagotrini/hello-iot) donde armo un pequeño proyecto de Internet de las Cosas con el protocolo MQTT.
