@@ -38,11 +38,13 @@ $ npm i express socket.io
 $ npm i -D nodemon
 ```
 
-En total son cuatro archivos de código, HTML, CSS y JS para el cliente, todo desde el directorio `public` usando `express.static()`, y un `index.js` en el server para recibir y transmitir los mensajes.
+En total son cuatro archivos de código, HTML, CSS y JS para el cliente, todo desde el directorio `public` usando `express.static()`, y un `index.js` en el server para recibir y transmitir los mensajes del chat.
 
 ## El server
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+En la tercer línea del server importamos el módulo `http`. Este módulo no lo instalamos con npm porque es uno de los módulos bases de NodeJS. Sirve para crear servidores HTTP y lo necesitamos porque Socket.IO se integra o monta sobre servidores creados con `http`.
+
+De todas maneras podemos utilizar Express pasando el objeto `app` de Express a `http.createServer()`. Además usamos Express para servir los archivos de `public`, los llamados _static assets_ para el cliente.
 
 ```js
 const express = require('express');
@@ -65,15 +67,25 @@ http.listen(port, () => {
 });
 ```
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+El método `listen()` es similar al que usamos con Express solo que ahora es un método de `http` (la instancia del server HTTP de NodeJS) y no de `app` que es la instancia de Express.
+
+Lo más interesante está en el medio. La instancia de Socket.IO nos provee del método `on()` para registrar _listeners_ a distintos eventos. El primer evento que escuchamos es el de `connection` que es uno de los eventos por defecto de la librería. Este evento se dispara cuando un cliente se conecta al servidor de la app y ejecuta una _callback_ que registra un segundo _event listener_ ahora escuchando para ese _socket_ particular (el _socket_ que se crea cuando se conecta algún cliente) el evento de `chat message` que es un evento que definimos nosotros. Cuando se dispara ese evento el server retransmite el mensaje que le llega a todos los otros clientes excepto por el cliente que lo envió con `socket.broadcast.emit()`.
+
+Y ese es todo el código del lado del servidor, super simple gracias a la magia de Socket.IO.
 
 ## El cliente
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Socket.IO consiste en dos partes, la librería del lado del servidor y la del lado del cliente que funciona en el navegador web. Si tenemos nuestro _frontend_ en el mismo server que el server de Socket.IO podemos importar la librería para el navegador simplemente con
+
+```html
+<script src="/socket.io/socket.io.js"></script>
+```
+
+Esto expone una variable global llamada `io` que podemos usar para comunicarnos con el server después en JavaScript.
 
 ### La UI
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+La interfaz de usuario es sencilla. Un _header_ con un _input_ para el nombre de usuario, un contenedor para los mensajes y un formulario con un _input_ para el mensaje y un botón de enviar. La definimos en `public/index.html`.
 
 ```html
 <!DOCTYPE html>
@@ -114,11 +126,11 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 </html>
 ```
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Antes de cerrar el _body_ importamos la librería y nuestro código de JS donde vamos a definir la lógica de la app. En el _head_ linkeamos [Font Awesome](https://fontawesome.com/), [Google Fonts](https://fonts.google.com/) y nuestro CSS.
 
 ### Un poco de diseño
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Yo usé el siguiente CSS, para mí fue un proceso de prueba y error, acepto críticas y consejos. Si quieren lo usan y sino se arman el suyo. No voy a decir que soy un experto en el tema ni mucho menos.
 
 ```css
 html, body {
@@ -231,7 +243,9 @@ button {
 }
 ```
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Una cosa interesante con la que estuve experimentando en esta app es Flexbox, una sintaxis relativamente reciente para definir el _layout_ de una web. Si quieren aprender sobre el tema la mejor guía que encontré online es la de [CSS Tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) (en inglés). También pueden leer en [MDN](https://developer.mozilla.org/es/docs/Web/CSS/CSS_Flexible_Box_Layout/Conceptos_Basicos_de_Flexbox) sobre el tema.
+
+Como no voy a explicar lo que intenté hacer con lo de arriba les dejo un link a [Khan Academy](https://es.khanacademy.org/computing/computer-programming/html-css) si quieren un poco más de teoría y práctica de CSS.
 
 ### Agregamos JavaScript
 
