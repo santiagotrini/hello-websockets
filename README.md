@@ -1,18 +1,24 @@
-# Hello websockets
+# Hello WebSockets
 
 Una aplicación de chat usando [WebSockets](https://developer.mozilla.org/es/docs/Web/API/WebSockets_API) y NodeJS. Basado en el [tutorial de Socket.IO](https://socket.io/get-started/chat). Demo en [la35chat.herokuapp.com](https://la35chat.herokuapp.com/).
 
 ## Qué vamos a hacer
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Vamos a desarrollar una app de chat super sencilla y de paso aprendemos a usar Socket.IO, una librería de JS para trabajar con comunicación en tiempo real bidireccional basada en eventos. Internamente Socket.IO utiliza WebSockets en la gran mayoría de las plataformas.
 
 ## Sockets
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+No voy a extenderme mucho sobre el tema porque tienen una materia entera en sexto año que gira alrededor de este concepto.
+
+Un _socket_ es un medio de comunicación entre procesos (programas). En el contexto de la programación sobre redes hablamos de _sockets_ cuando dos o más programas en distintas computadoras se comunican entre sí a través de una red. Un _socket_ es la interfaz a través de la cual sucede esa comunicación. La palabra _socket_ quiere decir enchufe o tomacorriente, el cable que los une es la red. El concepto es mucho más antiguo que la web, existe al menos desde [1983](https://en.wikipedia.org/wiki/Berkeley_sockets).
+
+Claro que toda comunicación a través de la red sucede a través de _sockets_, el protocolo HTTP no es la excepción, pero los WebSockets que son un estándar más moderno son distintos. HTTP y WS son protocolos distintos.
+
+La ventaja de los WebSockets es que liberan al cliente de tener que iniciar una comunicación con el servidor para recibir datos. Antes de que los navegadores implementaran este protocolo (que existe desde el 2011), aplicaciones como el chat de Facebook usaban una técnica llamada _AJAX long polling_, que es una versión adaptada a aplicaciones de tiempo real de lo que hicimos en [hello-fetch](https://github.com/santiagotrini/hello-fetch). Con el protocolo WebSockets obtenemos un canal [_full-duplex_](https://es.wikipedia.org/wiki/D%C3%BAplex_(telecomunicaciones), es decir algo parecido al teléfono, que podemos hablar todos a la vez y la información viaja en los dos sentidos en tiempo real. En cambio HTTP sería más parecido a comunicarse por carta.
 
 ## Creando el proyecto
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+Basta de teoría, creamos el proyecto. Vamos a usar Express para mandar HTML a los clientes y Socket.IO para pasar los mensajes entre los clientes conectados. Instalamos esos paquetes con npm. No voy a guardar los mensajes en alguna base de datos para no complicar demasiado el ejemplo.
 
 ```console
 $ mkdir hello-websockets
@@ -32,7 +38,7 @@ $ npm i express socket.io
 $ npm i -D nodemon
 ```
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+En total son cuatro archivos de código, HTML, CSS y JS para el cliente, todo desde el directorio `public` usando `express.static()`, y un `index.js` en el server para recibir y transmitir los mensajes.
 
 ## El server
 
