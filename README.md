@@ -313,4 +313,4 @@ El código que manipula el DOM y crea los mensajes es muy similar cuando enviamo
 
 Después de este breve desvío podemos terminar de ver el _stack_ MERN en [hello-react](https://github.com/santiagotrini/hello-react).
 
-Si quieren ver más protocolos que están de moda en los últimos años pueden pasar por [hello-iot](https://github.com/santiagotrini/hello-iot) donde armo un pequeño proyecto de Internet de las Cosas con el protocolo MQTT.
+Si les interesa saber más sobre protocolos distintos a HTTP pasen por [hello-iot](https://github.com/santiagotrini/hello-iot) donde armo un pequeño proyecto de Internet de las Cosas con el protocolo MQTT.
